@@ -1,0 +1,45 @@
+/* Shared motion language: quiet, responsive, and interruptible. */
+:root{--ease-out:cubic-bezier(.22,1,.36,1);--motion-fast:180ms;--motion-medium:320ms}
+@view-transition{navigation:auto}
+body,.site-header,.portrait-frame,.skill-card,.project-card,.contact-section{transition:background-color var(--motion-medium) ease,color var(--motion-medium) ease,border-color var(--motion-medium) ease}
+.button,.icon-button,.language-toggle,.portrait-contact,.skill-card,.project-card,.portrait-frame,.facts-strip>div,.experience-row,.education-list article{transition:transform var(--motion-medium) var(--ease-out),box-shadow var(--motion-medium) ease,background-color var(--motion-fast) ease,border-color var(--motion-fast) ease}
+.button-primary{color:#fff}
+.project-card,.project-visual .mock-window,.project-visual .bmi-mock{will-change:auto}
+.skill-symbol,.tags>span,.experience-date:after,.portrait-image-wrap img,.mock-window,.bmi-mock,.contact-email>span{transition:transform 420ms var(--ease-out),background-color 220ms ease,box-shadow 220ms ease}
+.main-nav a:after{content:"";position:absolute;bottom:3px;left:0;width:100%;height:2px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform 240ms var(--ease-out)}
+.main-nav a.is-active:after{width:100%;transform:scaleX(1)}
+.main-nav a:hover:after,.main-nav a:focus-visible:after{transform:scaleX(1)}
+.icon-button{min-height:40px;min-width:40px}
+.icon-button svg{transition:transform 320ms var(--ease-out)}
+[data-theme=dark] #theme-toggle svg{transform:rotate(-25deg)}
+.button:active,.icon-button:active,.portrait-contact:active{transform:translateY(0) scale(.98)}
+.button>span:last-child{transition:transform 240ms var(--ease-out)}
+.project-card .project-links a{transform:none!important}
+.project-links a{min-height:44px}
+.tool-visual{background:linear-gradient(135deg,#edf2ff,#dfe8fa)}
+.qr-visual{background:linear-gradient(135deg,#e7efee,#dbe7e5)}
+.tool-preview{display:flex;flex-direction:column;gap:10px;color:#081d63;background:#ffffffc9;padding:25px 30px;border-radius:14px;border:1px solid #fff;box-shadow:0 15px 40px #081d6310;width:100%;max-width:350px;transition:transform 420ms var(--ease-out)}
+.tool-preview-icon{font-size:38px;line-height:1.2}.tool-preview strong{font-size:20px;letter-spacing:-.6px}.tool-preview>span:last-child{font:11px Consolas,monospace;color:#596a8c}
+@media(hover:hover) and (pointer:fine){
+ .skill-card:hover,.project-card:hover,.portrait-frame:hover{transform:translateY(-4px);box-shadow:0 18px 45px -24px #081d6340}
+ .skill-card:hover .skill-symbol{transform:translateY(-2px) scale(1.04)}
+ .skill-card:hover .tags>span{transform:none}
+ .project-card:hover .tool-preview{transform:translateY(-3px)}
+ .portrait-frame:hover .portrait-image-wrap img{transform:scale(1.025)}
+ .button:hover>span:last-child,.contact-email:hover>span{transform:translate(2px,-2px)}
+ .icon-button:hover,.portrait-contact:hover{transform:translateY(-2px)}
+}
+@media(hover:none){
+ .skill-card:hover,.project-card:hover,.portrait-frame:hover,.button:hover,.experience-row:hover,.facts-strip>div:hover,.education-list article:hover,.skill-card:hover .skill-symbol,.skill-card:hover .tags>span,.portrait-frame:hover .portrait-image-wrap img,.project-card:hover .mock-window,.project-card:hover .bmi-mock{transform:none;box-shadow:none}
+}
+@media(max-width:900px){
+ .main-nav,.main-nav.is-open{display:flex;flex-direction:column;align-items:stretch;gap:0;max-height:calc(100dvh - 72px);overflow:auto;transform-origin:top;transition:opacity 200ms ease,transform 240ms var(--ease-out),visibility 240ms}
+ .main-nav{opacity:0;visibility:hidden;transform:translateY(-8px);pointer-events:none}
+ .main-nav.is-open{opacity:1;visibility:visible;transform:none;pointer-events:auto}
+}
+@media(prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto!important}
+ *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+ ::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}
+}
+@media print{*,*::before,*::after{animation:none!important;transition:none!important}}
