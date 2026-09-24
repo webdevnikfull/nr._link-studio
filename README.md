@@ -1,3 +1,3 @@
-![Link-Studio App Interface](banner_url.png)
+![Link-Studio App Interface](banner_url&qr&img.png)
 
 [Open app ↗](https://webdevnikfull.github.io/nr._link-studio/)
