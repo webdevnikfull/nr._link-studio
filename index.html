@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="pl" data-tool="qr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="NR. Tools — skracanie linków i generowanie kodów QR."><title>NR. Link Studio — URL &amp; QR</title><link rel="icon" href="favicon.svg"><script src="theme-init.js"></script><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="motion.css"><link rel="stylesheet" href="tools.css"><script src="vendor/qrcode.js" defer></script><script src="vendor/qrcode_UTF8.js" defer></script><script src="config.js"></script><script src="tools.js" defer></script></head>
+<html lang="pl" data-tool="qr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="NR. Link Studio — krótkie linki, kody QR i obrazy z publicznym adresem URL."><title>NR. Link Studio — URL, QR &amp; Image</title><link rel="icon" href="favicon.svg"><script src="theme-init.js"></script><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="motion.css"><link rel="stylesheet" href="tools.css"><link rel="stylesheet" href="image-studio.css"><script src="vendor/qrcode.js" defer></script><script src="vendor/qrcode_UTF8.js" defer></script><script src="config.js"></script><script src="tools.js" defer></script><script src="image-files.js" defer></script><script src="image-translations.js" defer></script><script src="image-studio.js" defer></script></head>
 <body><a href="#main" class="skip-link" data-i="skip">Przejdź do treści</a><header class="tool-header"><a class="brand" href="../index.html" id="portfolio-link" aria-label="Portfolio Nikita Rysiev">nr<span>.</span><span class="brand-caption">LINK STUDIO</span></a><div class="tool-header-actions"><label class="sr-only" for="language" data-i="language">Język</label><select id="language"><option value="pl">PL</option><option value="en">EN</option><option value="de">DE</option></select><button class="icon-button" id="theme" type="button" aria-label="Motyw" aria-pressed="false">◐</button></div></header>
-<main id="main" class="tool-main"><nav class="tool-tabs" aria-label="Tools"><a href="index.html?tool=short" data-i="shortTab" >Skracacz linków</a><a href="index.html?tool=qr" data-i="qrTab">Generator QR</a></nav>
+<main id="main" class="tool-main"><nav class="tool-tabs" aria-label="Tools"><a href="index.html?tool=short" data-i="shortTab" >Skracacz linków</a><a href="index.html?tool=qr" data-i="qrTab">Generator QR</a><a href="index.html?tool=image" data-i="imageTab">Obraz → URL</a></nav>
 <section class="tool-heading"><p class="eyebrow">NR. / LINK STUDIO</p><h1 data-i="title"></h1><p data-i="intro"></p></section>
-<div class="workspace"><section class="input-panel" aria-labelledby="input-heading"><div class="panel-heading"><span class="step-number">01</span><h2 id="input-heading" data-i="inputHeading"></h2></div>
+<div class="workspace" id="link-workspace"><section class="input-panel" aria-labelledby="input-heading"><div class="panel-heading"><span class="step-number">01</span><h2 id="input-heading" data-i="inputHeading"></h2></div>
 <form id="tool-form" novalidate><label for="url" data-i="urlLabel"></label><div class="url-field"><span aria-hidden="true">↗</span><input id="url" name="url" type="url" inputmode="url" autocomplete="url" spellcheck="false" maxlength="2048" placeholder="https://example.com" aria-describedby="url-hint message" required></div><p class="field-hint" id="url-hint" data-i="hint"></p>
 <div class="settings-grid" id="qr-settings"><div><label for="size" data-i="size"></label><select id="size"><option value="512">512 × 512 px</option><option value="1024" selected>1024 × 1024 px</option><option value="2048">2048 × 2048 px</option></select></div><div><label for="ink" data-i="ink"></label><select id="ink"><option value="#081d63" data-i="navy"></option><option value="#111111" data-i="black"></option><option value="#164e3f" data-i="green"></option></select></div></div>
 <button type="submit" class="button button-primary generate" id="generate"><span data-i="generate"></span><span aria-hidden="true">↗</span></button><p id="message" class="message" role="status" aria-live="polite"></p></form>
@@ -11,5 +11,48 @@
 <section class="output-panel" aria-labelledby="output-heading"><div class="panel-heading"><span class="step-number">02</span><h2 id="output-heading" data-i="outputHeading"></h2><span id="ready-badge" class="ready-badge" hidden data-i="ready"></span></div>
 <div id="empty" class="empty-state"><div class="empty-icon" aria-hidden="true">▦</div><h3 data-i="emptyTitle"></h3><p data-i="emptyText"></p></div>
 <div id="result" hidden><div id="qr-preview" ></div><p class="result-caption" data-i="resultCaption"></p><a id="result-url" target="_blank" rel="noopener noreferrer"></a><p class="field-hint" id="result-meta"></p><div class="result-actions"><button class="button button-primary" id="copy" type="button" data-i="copy" hidden></button><a class="button button-secondary" id="make-qr" data-i="makeQr" hidden></a><button class="button button-primary" id="png" type="button">PNG ↓</button><button class="button button-secondary" id="svg" type="button">SVG ↓</button></div></div></section></div>
+<!-- Source fragment included in index.html; not a separate page. -->
+<section id="image-workspace" class="workspace image-workspace" hidden aria-label="Image to URL">
+  <section class="input-panel" aria-labelledby="image-input-heading">
+    <div class="panel-heading"><span class="step-number">01</span><h2 id="image-input-heading" data-i="imageInputHeading">Wybierz obraz</h2><span class="image-limit">10 MB</span></div>
+    <input id="image-file" class="sr-only" type="file" accept=".jpg,.jpeg,.jpe,.png,.apng,.gif,.webp,.avif,.bmp,.ico,.tif,.tiff,.heic,.heif,.svg" tabindex="-1" aria-label="Wybierz obraz">
+    <button type="button" id="image-drop" class="image-drop" aria-describedby="image-formats image-message">
+      <span class="upload-art" aria-hidden="true"><svg viewBox="0 0 144 106" fill="none"><rect x="24" y="20" width="93" height="67" rx="10" transform="rotate(-12 24 20)" class="art-back"/><rect x="27" y="17" width="96" height="70" rx="10" class="art-card"/><path d="m38 74 23-25 18 16 12-12 20 21" class="art-landscape"/><circle cx="96" cy="38" r="7" class="art-sun"/><circle cx="120" cy="85" r="17" class="art-badge"/><path d="M120 92V78m-5 5 5-5 5 5" class="art-arrow"/></svg></span>
+      <strong data-i="dropTitle">Przeciągnij obraz tutaj</strong><span class="drop-subtitle" data-i="dropSubtitle">lub kliknij, aby wybrać plik</span>
+      <span class="drop-chip" data-i="chooseFile">Wybierz z urządzenia ↗</span>
+    </button>
+    <div id="selected-file" class="selected-file" hidden>
+      <div class="selected-thumb"><img id="selected-thumb" alt=""><span id="selected-extension" hidden>IMG</span></div>
+      <div class="selected-info"><strong id="selected-name"></strong><span id="selected-meta"></span></div>
+      <button type="button" id="clear-image" class="remove-file" aria-label="Usuń wybrany plik">×</button>
+    </div>
+    <p id="image-formats" class="field-hint" data-i="formats">JPG, PNG, GIF, WebP, SVG i więcej · maks. 10 MB</p>
+    <details class="format-details"><summary data-i="allFormats">Wszystkie obsługiwane formaty</summary><p>JPG / JPEG · PNG / APNG · GIF · WebP · AVIF · BMP · ICO · TIFF · HEIC / HEIF · SVG</p><p data-i="formatNote">SVG zamieniamy lokalnie na PNG. Podgląd TIFF i HEIC zależy od przeglądarki; publiczny link nadal działa.</p></details>
+    <button type="button" class="button button-primary generate" id="upload-image" disabled><span data-i="upload">Utwórz link do obrazu</span><span aria-hidden="true">↗</span></button>
+    <div id="image-progress" class="image-progress" hidden><progress aria-label="Wysyłanie obrazu"></progress><span data-i="uploading">Przesyłanie obrazu…</span></div>
+    <p id="image-message" class="message" role="status" aria-live="polite"></p><button type="button" id="image-retry" class="service-retry" data-i="retry" hidden>Spróbuj ponownie</button>
+    <div class="privacy-note"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3 4 6v6c0 5 8 9 8 9s8-4 8-9V6l-8-3Z"/><path d="m8 12 3 3 5-6"/></svg><p data-i="imagePrivacy">Obraz jest wysyłany dopiero po kliknięciu. Każdy, kto ma link, może go otworzyć przez 30 dni. Oryginalne pliki zachowują metadane.</p></div>
+  </section>
+  <section class="output-panel image-output-panel" aria-labelledby="image-output-heading">
+    <div class="panel-heading"><span class="step-number">02</span><h2 id="image-output-heading" data-i="imageOutputHeading">Twój obraz. Twój link.</h2><span id="image-ready" class="ready-badge" hidden data-i="ready">GOTOWE</span></div>
+    <div id="image-empty" class="image-empty">
+      <div class="image-empty-art" aria-hidden="true"><div class="empty-photo"><svg viewBox="0 0 120 90" fill="none"><rect x="1" y="1" width="118" height="88" rx="9"/><circle cx="87" cy="25" r="9"/><path d="m10 75 31-34 26 22 15-14 28 26"/></svg></div><div class="empty-link"><svg viewBox="0 0 24 24" fill="none"><path d="m10 13 4-4m-6 5-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 4 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0"/></svg><span>https://…/image</span><i></i></div></div>
+      <h3 id="preview-title" data-i="previewTitle">Z pliku do udostępnienia.</h3><p id="preview-description" data-i="previewDescription">Dodaj obraz, utwórz link i podziel się nim tam, gdzie chcesz.</p>
+    </div>
+    <div id="image-preview-wrap" class="image-preview-wrap" hidden><div class="image-preview-frame"><img id="image-preview" alt=""><div id="preview-fallback" class="preview-fallback" hidden><span id="fallback-extension">IMG</span><p data-i="noPreview">Ten format nie ma podglądu w tej przeglądarce. Możesz utworzyć link do oryginalnego pliku.</p></div></div><div class="preview-footer"><span id="preview-name"></span><span id="preview-tag" data-i="localPreview">PODGLĄD LOKALNY</span></div></div>
+    <div id="image-output" class="image-output" hidden>
+      <p class="result-caption" data-i="publicLink">PUBLICZNY LINK DO OBRAZU</p><div class="image-link-field"><input id="image-result-url" readonly spellcheck="false" aria-label="Publiczny link do obrazu"><button id="image-copy" type="button" data-i="copy">Kopiuj link</button></div>
+      <p id="image-expiry" class="field-hint"></p>
+      <div class="result-actions image-result-actions"><a id="open-image" class="button button-primary" target="_blank" rel="noopener noreferrer" data-i="openImage">Otwórz obraz ↗</a><a id="image-make-qr" class="button button-secondary" data-i="makeQr">Utwórz QR ↗</a></div>
+      <div class="image-output-bottom"><button type="button" id="delete-image" data-i="deleteImage">Usuń z serwera</button><button type="button" id="image-receipt" data-i="receipt">Zapisz link ↓</button></div>
+      <p class="field-hint" data-i="deleteNote">Usuwanie jest dostępne do wybrania kolejnego obrazu lub opuszczenia tej strony. Później link wygaśnie automatycznie.</p>
+    </div>
+    <div id="image-preview-note" class="preview-note"><span class="preview-dot"></span><span data-i="previewPrivate">Podgląd jest widoczny tylko dla Ciebie.</span></div>
+  </section>
+</section>
+
 <section class="how-it-works"><div><span>01 /</span><h3 data-i="step1"></h3><p data-i="step1Text"></p></div><div><span>02 /</span><h3 data-i="step2"></h3><p data-i="step2Text"></p></div><div><span>03 /</span><h3 data-i="step3"></h3><p data-i="step3Text"></p></div></section>
 <noscript>Włącz JavaScript, aby korzystać z narzędzia. / Enable JavaScript to use this tool.</noscript></main><footer class="tool-footer"><span>© 2026 Nikita Rysiev</span><a id="back-link" href="../index.html#projects" data-i="back"></a></footer></body></html>
+
+
+
