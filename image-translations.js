@@ -42,3 +42,5 @@ window.NRImageTranslations = {
   rate_limit:'Upload-Limit erreicht. Bitte später erneut versuchen.',capacity:'Der Bildserver ist voll. Bitte später erneut versuchen.',origin:'Der Dienst ist noch nicht mit dieser App-Adresse verbunden.',forbidden:'Die Berechtigung zum Löschen konnte nicht bestätigt werden.',not_found:'Dieses Bild ist nicht mehr verfügbar.',expired:'Dieser Bildlink ist abgelaufen.',invalid_request:'Die Anfrage konnte nicht verarbeitet werden. Bitte erneut versuchen.',no_file:'Wähle ein Bild, bevor du einen Link erstellst.',retry:'Erneut versuchen',meta:'NR. Link Studio — öffentliche Bildlinks, Link-Kürzer und QR-Code-Generator.'
  }
 };
+
+Object.assign(window.NRImageTranslations, window.NRExtraImage);

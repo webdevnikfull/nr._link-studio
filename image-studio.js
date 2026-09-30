@@ -6,7 +6,7 @@
   const $ = id => document.getElementById(id);
   const config = window.NR_LINK_STUDIO || {};
   const dictionaries = window.NRImageTranslations;
-  let lang = Object.hasOwn(dictionaries, params.get('lang')) ? params.get('lang') : 'pl';
+  let lang = window.StudioLanguage;
   let prepared = null, previewURL = '', uploaded = null, version = 0;
   let busy = '', ready = false, checkingService = false, maxBytes = NRImageFiles.MAX_BYTES, retentionDays = 30;
   let messageKey = 'checkingService', messageError = false;
@@ -41,7 +41,7 @@
     $('upload-image').querySelector('[data-i]').textContent = t(busy === 'upload' ? 'uploading' : 'upload');
   }
   function dateText(value) {
-    return new Intl.DateTimeFormat({ pl: 'pl-PL', en: 'en-GB', de: 'de-DE' }[lang], {
+    return new Intl.DateTimeFormat(lang, {
       day: 'numeric', month: 'long', year: 'numeric'
     }).format(new Date(value));
   }
