@@ -1,0 +1,17 @@
+/* A focused, responsive QR workspace with the portfolio's controls. */
+.tool-heading{margin:40px 0 32px}.workspace{border-radius:24px}
+.language-picker{position:relative}.language-picker>button{display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:28px;min-height:46px;padding:10px 17px;background:var(--surface);color:var(--navy);font-size:12px;font-weight:600}
+.language-picker svg{width:17px;height:17px;stroke:currentColor;stroke-width:1.5}.language-picker .chevron{width:13px;height:13px;fill:none;transition:transform .2s}.language-picker>button[aria-expanded=true] .chevron{transform:rotate(180deg)}
+#language-menu{position:absolute;z-index:30;right:0;top:calc(100% + 10px);min-width:210px;padding:8px;border:1px solid var(--line);border-radius:17px;background:var(--surface);box-shadow:0 16px 45px #081d6320}
+#language-menu button{display:flex;align-items:center;gap:13px;width:100%;border:0;background:transparent;color:var(--text);padding:11px 12px;border-radius:10px;text-align:left;cursor:pointer}#language-menu button span{font:10px monospace;letter-spacing:.8px;color:var(--muted);width:24px}
+#language-menu button:hover,#language-menu button[aria-pressed=true]{background:var(--surface-alt);color:var(--navy)}
+#theme{display:grid;place-items:center;width:46px;height:46px;padding:0;border:1px solid var(--line);border-radius:50%;background:var(--surface);color:var(--navy)}#theme svg{width:19px;height:19px;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.qr-shortcuts{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px}.qr-shortcuts button{border:1px solid var(--line);background:var(--surface-alt);color:var(--navy);font-size:11px;padding:7px 11px;border-radius:9px;min-height:36px}
+.correction-field{grid-column:1/-1}.button-primary{background:var(--navy);border-color:var(--navy);color:var(--bg)}.button-primary:hover{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.output-panel{display:flex;flex-direction:column;position:relative}.output-panel>#result{margin:auto 0}.output-panel>.empty-state{flex:1}
+#qr-preview{width:250px;max-width:100%;padding:16px;box-shadow:0 22px 36px -26px #081d6355;transition:transform .3s ease,box-shadow .3s ease}
+.result-actions .button{flex:1;justify-content:center}#result-url{font-size:15px}
+@media(hover:hover){#qr-preview:hover{transform:translateY(-3px);box-shadow:0 26px 40px -24px #081d6355}.qr-shortcuts button:hover{border-color:var(--accent)}}
+@media(prefers-reduced-motion:no-preference){.qr-updated{animation:qr-reveal .35s ease}.empty-icon{animation:qr-float 5s ease-in-out infinite}@keyframes qr-reveal{from{opacity:.6;transform:scale(.96)}to{opacity:1;transform:scale(1)}}@keyframes qr-float{50%{transform:translateY(-5px)}}}
+@media(max-width:480px){.tool-header-actions{gap:8px}.language-picker>button{gap:8px;padding:10px 12px}.tool-heading{margin-top:30px}.input-panel,.output-panel{padding:22px}.panel-heading{flex-wrap:wrap}.ready-badge{margin-left:0}#qr-preview{width:224px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
